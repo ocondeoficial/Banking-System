@@ -20,18 +20,18 @@ double Account::getBalance() const {
     return balance;
 }
 
-void Account::deposit(double amount) {
-    balance += amount;
-    std::cout << "Deposit of $" << amount << " was successful!" << std::endl;
+bool Account::deposit(double amount) {
+    if (amount > 0) {
+        balance += amount;
+        return true; // Depósito bem-sucedido
+    }
+    return false; // Valor inválido para depósito
 }
 
 bool Account::withdraw(double amount) {
-    if (balance >= amount) {
+    if (balance >= amount && amount > 0) {
         balance -= amount;
-        std::cout << "Withdrawal of $" << amount << " was successful!" << std::endl;
-        return true;
-    } else {
-        std::cerr << "Insufficient balance!" << std::endl;
-        return false;
+        return true; // Saque bem-sucedido
     }
+    return false; // Saldo insuficiente ou valor inválido
 }

@@ -1,8 +1,9 @@
 #include "accountController.h"
 #include "../third_party/json.hpp"
+#include "../services/hashUtils.h"
+
 
 using json = nlohmann::json;
-
 
 AccountController::AccountController() {}
 
@@ -11,10 +12,30 @@ void AccountController::setupRoutes(httplib::Server& server) {
         auto body = json::parse(req.body);
         std::string holder = body["holder"];
         std::string cpf = body["cpf"];
+        std::string password = body["password"];
         double initialBalance = body["initial_balance"];
 
-        accountService.createAccount(holder, cpf, initialBalance);
-        res.set_content("Account created successfully!", "text/plain");
+        std::string hashedPassword = hashPassword(password);
+
+        if (accountService.createAccount(holder, cpf, hashedPassword, initialBalance)) {
+            res.set_content("Account created successfully!", "text/plain");
+        } else {
+            res.status = 400;
+            res.set_content("Error creating account. CPF may already exist.", "text/plain");
+        }
+    });
+
+    server.Post("/account/login", [&](const httplib::Request& req, httplib::Response& res) {
+        auto body = json::parse(req.body);
+        std::string cpf = body["cpf"];
+        std::string password = body["password"];
+
+        if (accountService.validateLogin(cpf, password)) {
+            res.set_content("Login successful!", "text/plain");
+        } else {
+            res.status = 401;
+            res.set_content("Invalid CPF or password.", "text/plain");
+        }
     });
 
     server.Get("/account/find", [&](const httplib::Request& req, httplib::Response& res) {
@@ -58,7 +79,7 @@ void AccountController::setupRoutes(httplib::Server& server) {
             res.status = 400;
             res.set_content("Withdrawal failed! Check balance or CPF.", "text/plain");
         }
-    }); 
+    });
 
     server.Post("/account/transfer", [&](const httplib::Request& req, httplib::Response& res) {
         auto body = json::parse(req.body);
@@ -66,11 +87,17 @@ void AccountController::setupRoutes(httplib::Server& server) {
         std::string toCpf = body["to_cpf"];
         double amount = body["amount"];
 
+        if (amount <= 0) {
+            res.status = 400;
+            res.set_content("Invalid transfer amount. Must be greater than 0.", "text/plain");
+            return;
+        }
+
         if (accountService.transfer(fromCpf, toCpf, amount)) {
             res.set_content("Transfer successful!", "text/plain");
         } else {
             res.status = 400;
-            res.set_content("Transfer failed! Check balance or CPF.", "text/plain");
+            res.set_content("Transfer failed! Check balance, CPF, or other details.", "text/plain");
         }
     });
 }

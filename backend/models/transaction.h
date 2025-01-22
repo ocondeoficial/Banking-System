@@ -4,7 +4,7 @@
 class Transaction {
 private:
     int id;
-    std::string type;  // Deposit, Withdraw, Transfer
+    std::string type;
     double amount;
     std::string date;
     int accountId;

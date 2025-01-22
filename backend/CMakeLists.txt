@@ -13,7 +13,8 @@ add_executable(BankingSystem
     services/accountService.cpp
     models/account.cpp
     models/transaction.cpp
+    
 )
 
 # Link libraries
-target_link_libraries(BankingSystem pq pthread)
+target_link_libraries(BankingSystem pq pthread ssl crypto)

@@ -16,6 +16,6 @@ public:
     std::string getCpf() const;
     double getBalance() const;
 
-    void deposit(double amount);
+    bool deposit(double amount);
     bool withdraw(double amount);
 };
