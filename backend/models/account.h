@@ -1,21 +1,20 @@
-#pragma once
-#include <string>
+#include "account.h"
 
-class Account {
-private:
-    int id;
-    std::string holder;
-    std::string cpf;
-    double balance;
+Account::Account(int id, const std::string& holder, const std::string& cpf, double balance)
+    : id(id), holder(holder), cpf(cpf), balance(balance) {}
 
-public:
-    Account(int id, const std::string& holder, const std::string& cpf, double initialBalance);
+int Account::getId() const {
+    return id;
+}
 
-    int getId() const;
-    std::string getHolder() const;
-    std::string getCpf() const;
-    double getBalance() const;
+std::string Account::getHolder() const {
+    return holder;
+}
 
-    bool deposit(double amount);
-    bool withdraw(double amount);
-};
+std::string Account::getCpf() const {
+    return cpf;
+}
+
+double Account::getBalance() const {
+    return balance;
+}

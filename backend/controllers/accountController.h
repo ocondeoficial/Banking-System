@@ -2,12 +2,13 @@
 #include "../services/accountService.h"
 #include <httplib.h>
 
+// Controlador responsável por gerenciar as rotas relacionadas às contas
 class AccountController {
 private:
-    AccountService accountService;
+    AccountService accountService; // Serviço de contas para operações no banco de dados
 
 public:
-    AccountController();
+    AccountController(); // Construtor
 
-    void setupRoutes(httplib::Server& server);
+    void setupRoutes(httplib::Server& server); // Configura todas as rotas da API
 };

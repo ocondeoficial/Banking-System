@@ -11,5 +11,7 @@ CREATE TABLE transactions (
     type VARCHAR(20) NOT NULL,
     amount NUMERIC(12, 2) NOT NULL,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    from_cpf CHAR(11),
+    to_cpf CHAR(11),
     account_id INT REFERENCES accounts(id)
 );

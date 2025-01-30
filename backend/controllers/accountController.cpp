@@ -1,46 +1,59 @@
 #include "accountController.h"
+
+#include <iostream>
 #include "../third_party/json.hpp"
 #include "../services/hashUtils.h"
-
 
 using json = nlohmann::json;
 
 AccountController::AccountController() {}
 
+// Configuração das rotas da API
 void AccountController::setupRoutes(httplib::Server& server) {
+    
+    // Criar conta
     server.Post("/account/create", [&](const httplib::Request& req, httplib::Response& res) {
-        auto body = json::parse(req.body);
-        std::string holder = body["holder"];
-        std::string cpf = body["cpf"];
-        std::string password = body["password"];
-        double initialBalance = body["initial_balance"];
+        try {
+            auto body = json::parse(req.body);
+            std::string holder = body["holder"];
+            std::string cpf = body["cpf"];
+            std::string password = body["password"];
+            double initialBalance = body["initial_balance"];
 
-        std::string hashedPassword = hashPassword(password);
+            std::string hashedPassword = hashPassword(password);
+            bool success = accountService.createAccount(holder, cpf, hashedPassword, initialBalance);
 
-        if (accountService.createAccount(holder, cpf, hashedPassword, initialBalance)) {
-            res.set_content("Account created successfully!", "text/plain");
-        } else {
+            json response = {{"message", success ? "Account created successfully!" : "Error creating account. CPF may already exist."}};
+            res.status = success ? 200 : 400;
+            res.set_content(response.dump(), "application/json");
+        } catch (const std::exception&) {
             res.status = 400;
-            res.set_content("Error creating account. CPF may already exist.", "text/plain");
+            res.set_content(json{{"error", "Invalid request format"}}.dump(), "application/json");
         }
     });
 
+    // Login de conta
     server.Post("/account/login", [&](const httplib::Request& req, httplib::Response& res) {
-        auto body = json::parse(req.body);
-        std::string cpf = body["cpf"];
-        std::string password = body["password"];
+        try {
+            auto body = json::parse(req.body);
+            std::string cpf = body["cpf"];
+            std::string password = body["password"];
+            bool success = accountService.validateLogin(cpf, password);
 
-        if (accountService.validateLogin(cpf, password)) {
-            res.set_content("Login successful!", "text/plain");
-        } else {
-            res.status = 401;
-            res.set_content("Invalid CPF or password.", "text/plain");
+            json response = {{"message", success ? "Login successful!" : "Invalid CPF or password."}};
+            res.status = success ? 200 : 401;
+            res.set_content(response.dump(), "application/json");
+        } catch (const std::exception&) {
+            res.status = 400;
+            res.set_content(json{{"error", "Invalid request format"}}.dump(), "application/json");
         }
     });
 
+    // Buscar conta por CPF
     server.Get("/account/find", [&](const httplib::Request& req, httplib::Response& res) {
         std::string cpf = req.get_param_value("cpf");
         Account* account = accountService.findAccountByCpf(cpf);
+
         if (account) {
             json response = {
                 {"id", account->getId()},
@@ -51,53 +64,94 @@ void AccountController::setupRoutes(httplib::Server& server) {
             res.set_content(response.dump(), "application/json");
         } else {
             res.status = 404;
-            res.set_content("Account not found", "text/plain");
+            res.set_content(json{{"error", "Account not found"}}.dump(), "application/json");
         }
     });
 
+    // Depositar dinheiro
     server.Post("/account/deposit", [&](const httplib::Request& req, httplib::Response& res) {
-        auto body = json::parse(req.body);
-        std::string cpf = body["cpf"];
-        double amount = body["amount"];
+        try {
+            auto body = json::parse(req.body);
+            std::string cpf = body["cpf"];
+            double amount = body["amount"];
 
-        if (accountService.deposit(cpf, amount)) {
-            res.set_content("Deposit successful!", "text/plain");
-        } else {
-            res.status = 404;
-            res.set_content("Account not found!", "text/plain");
+            bool success = accountService.deposit(cpf, amount);
+            json response = {{"message", success ? "Deposit successful!" : "Account not found!"}};
+            res.status = success ? 200 : 404;
+            res.set_content(response.dump(), "application/json");
+        } catch (const std::exception&) {
+            res.status = 400;
+            res.set_content(json{{"error", "Invalid request format"}}.dump(), "application/json");
         }
     });
 
+    // Sacar dinheiro
     server.Post("/account/withdraw", [&](const httplib::Request& req, httplib::Response& res) {
-        auto body = json::parse(req.body);
-        std::string cpf = body["cpf"];
-        double amount = body["amount"];
+        try {
+            auto body = json::parse(req.body);
+            std::string cpf = body["cpf"];
+            double amount = body["amount"];
 
-        if (accountService.withdraw(cpf, amount)) {
-            res.set_content("Withdrawal successful!", "text/plain");
-        } else {
+            bool success = accountService.withdraw(cpf, amount);
+            json response = {{"message", success ? "Withdrawal successful!" : "Withdrawal failed! Check balance or CPF."}};
+            res.status = success ? 200 : 400;
+            res.set_content(response.dump(), "application/json");
+        } catch (const std::exception&) {
             res.status = 400;
-            res.set_content("Withdrawal failed! Check balance or CPF.", "text/plain");
+            res.set_content(json{{"error", "Invalid request format"}}.dump(), "application/json");
         }
     });
 
+    // Transferência entre contas
     server.Post("/account/transfer", [&](const httplib::Request& req, httplib::Response& res) {
-        auto body = json::parse(req.body);
-        std::string fromCpf = body["from_cpf"];
-        std::string toCpf = body["to_cpf"];
-        double amount = body["amount"];
+        try {
+            auto body = json::parse(req.body);
+            std::string fromCpf = body["from_cpf"];
+            std::string toCpf = body["to_cpf"];
+            double amount = body["amount"];
 
-        if (amount <= 0) {
+            if (amount <= 0) {
+                res.status = 400;
+                res.set_content(json{{"error", "Invalid transfer amount. Must be greater than 0."}}.dump(), "application/json");
+                return;
+            }
+
+            bool success = accountService.transfer(fromCpf, toCpf, amount);
+            json response = {{"message", success ? "Transfer successful!" : "Transfer failed! Check balance, CPF, or other details."}};
+            res.status = success ? 200 : 400;
+            res.set_content(response.dump(), "application/json");
+        } catch (const std::exception&) {
             res.status = 400;
-            res.set_content("Invalid transfer amount. Must be greater than 0.", "text/plain");
-            return;
+            res.set_content(json{{"error", "Invalid request format"}}.dump(), "application/json");
         }
+    });
 
-        if (accountService.transfer(fromCpf, toCpf, amount)) {
-            res.set_content("Transfer successful!", "text/plain");
+    // Buscar transações por CPF
+    server.Get("/account/transactions", [&](const httplib::Request& req, httplib::Response& res) {
+        try {
+            std::string cpf = req.get_param_value("cpf");
+            json transactions = accountService.getTransactionsByCpf(cpf);
+
+            if (transactions.empty()) {
+                res.status = 404;
+                res.set_content(json{{"error", "No transactions found"}}.dump(), "application/json");
+            } else {
+                res.set_content(transactions.dump(), "application/json");
+            }
+        } catch (const std::exception&) {
+            res.status = 500;
+            res.set_content(json{{"error", "Internal server error"}}.dump(), "application/json");
+        }
+    });
+
+    // Buscar todas as transações
+    server.Get("/account/transactions/all", [&](const httplib::Request& req, httplib::Response& res) {
+        json transactions = accountService.getAllTransactions();
+        if (transactions.empty()) {
+            res.status = 404;
+            res.set_content(json{{"error", "No transactions found"}}.dump(), "application/json");
         } else {
-            res.status = 400;
-            res.set_content("Transfer failed! Check balance, CPF, or other details.", "text/plain");
+            res.set_content(transactions.dump(), "application/json");
         }
     });
 }

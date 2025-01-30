@@ -1,115 +1,91 @@
-# Banking System
+# **Banking System**
 
-## Overview
-The Banking System prototype is a foundational project designed to simulate essential banking operations. It focuses on modularity and simplicity while maintaining core functionalities like account management, basic transaction handling, and secure data storage. This prototype is built using **C++** for backend logic and **Angular** for a responsive frontend.
-
----
-
-## Key Features
-
-1. **Account Management**
-   - Create, edit, and delete bank accounts.
-   - View basic account information, including balance and account holder.
-
-2. **Banking Operations**
-   - Perform basic deposits, withdrawals, and transfers between accounts.
-   - Keep a simple log of transaction history.
-
-3. **Basic Security**
-   - Simulated user authentication.
-   - Simple encryption for sensitive data.
-
-4. **Reports (Basic Analytics)**
-   - Provide straightforward summaries of account and transaction activities.
+O **Banking System** é um projeto de sistema bancário simplificado que permite a criação de contas, depósitos, saques, transferências e consulta de transações financeiras.
 
 ---
 
-## Technologies Used
-
-- **Backend**:
-  - Language: **C++**
-  - Database: **PostgreSQL**
-  - API Library: **cpp-httplib**
-
-- **Frontend**:
-  - Framework: **Angular**
-  - UI Components: **Angular Material**
-  - Styling: **SCSS**
+## **Sumário**
+- [Back-End](#back-end)
+- [Front-End](#front-end)
+- [Contribuições](#contribuições)
+- [Licença](#licença)
 
 ---
 
-## Technical Highlights
+## **Back-End**
 
-### Backend
-- **Modularity**:
-  - Divided into simple classes for `Bank`, `Account`, and `Transaction` management.
-- **Validation**:
-  - Implements basic input checks, like valid CPF and balance sufficiency.
-- **Database**:
-  - Uses PostgreSQL for storing accounts and transactions with basic SQL scripts.
+### **Tecnologias Utilizadas**
+- **C++** (compilado com g++)
+- **PostgreSQL** (Banco de dados)
+- **cpp-httplib** (Servidor HTTP)
+- **json.hpp** (Manipulação de JSON)
+- **OpenSSL** (Hash de senhas com SHA256)
+- **Docker** (Para ambiente de desenvolvimento e banco de dados)
 
-### Frontend
-- **Angular-Based UI**:
-  - Provides a basic interface for interacting with the backend.
-- **Routing**:
-  - Includes basic navigation for managing accounts, performing transactions, and viewing reports.
-- **Responsive Design**:
-  - Optimized for both desktop and mobile browsers.
+### **Instalação e Configuração**
 
----
+#### **Pré-requisitos**
+- **Docker** e **Docker Compose** instalados
+- **g++** (caso deseje rodar sem Docker)
+- **PostgreSQL** (caso deseje rodar sem Docker)
 
-## System Flow
+#### **Passos para rodar o backend**
+1. **Clone o repositório**  
+   ```sh
+   git clone https://github.com/yLukas077/Banking-System.git
+   cd banking-system
+   ```
 
-1. **Authentication**:
-   - Simulated login process for users.
-2. **Account Management**:
-   - Create and view account details.
-3. **Transactions**:
-   - Perform deposits, withdrawals, and transfers.
-4. **Basic Reports**:
-   - View a log of recent transactions.
+2. **Suba os containers com Docker Compose**  
+   ```sh
+   docker-compose up --build
+   ```
 
----
+3. **A API estará disponível em:**  
+   ```
+   http://localhost:8080
+   ```
 
-## Development Workflow
+### **Rotas da API**
 
-### Backend
-- **Data Handling**:
-  - Basic CRUD operations for accounts and transactions.
-- **Validation**:
-  - Simplified checks for user input and account operations.
-- **Database**:
-  - Minimalistic schema with two tables: `accounts` and `transactions`.
+#### **Autenticação e Conta**
+- **Criar conta:** `POST /account/create`
+- **Login:** `POST /account/login`
+- **Buscar conta por CPF:** `GET /account/find?cpf={cpf}`
 
-### Frontend
-- **Simple UI**:
-  - Minimalistic forms and tables for data interaction.
-- **State Management**:
-  - Basic Angular services to handle backend communication.
+#### **Operações Bancárias**
+- **Depósito:** `POST /account/deposit`
+- **Saque:** `POST /account/withdraw`
+- **Transferência:** `POST /account/transfer`
 
----
-
-## Future Improvements
-While this prototype is a basic implementation, potential improvements include:
-- Enhanced user authentication (e.g., OAuth 2.0).
-- Advanced validation and error handling.
-- Expanded reporting with visual charts.
-- Support for role-based access.
+#### **Consultas**
+- **Consultar transações por CPF:** `GET /transactions?cpf={cpf}`
+- **Consultar todas as transações:** `GET /transactions/all`
 
 ---
 
-## Setup Instructions
+## **Front-End**
 
-### Backend
-1. Install C++ and PostgreSQL.
-2. Set up the database using the provided initialization script.
-3. Compile and run the backend.
+### **Tecnologias Utilizadas**
 
-### Frontend
-1. Install Angular CLI.
-2. Set up the frontend dependencies (`npm install`).
-3. Run the frontend using `ng serve`.
 
 ---
 
-This project serves as a prototype for understanding and demonstrating basic banking functionalities, providing a foundation for further development and refinement.
+## **Contribuições**
+Contribuições são bem-vindas! Se deseja ajudar no desenvolvimento do projeto, siga os passos:
+1. Faça um **fork** do repositório.
+2. Crie uma **branch** com a nova funcionalidade ou correção:  
+   ```sh
+   git checkout -b minha-mudanca
+   ```
+3. **Commit suas alterações:**  
+   ```sh
+   git commit -m "Descrição da mudança"
+   ```
+4. **Envie para seu fork:**  
+   ```sh
+   git push origin minha-mudanca
+   ```
+5. **Crie um Pull Request** no repositório principal.
+
+---
