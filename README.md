@@ -1,90 +1,90 @@
 # **Banking System**
 
-O **Banking System** é um projeto de sistema bancário simplificado que permite a criação de contas, depósitos, saques, transferências e consulta de transações financeiras.
+The **Banking System** is a simplified banking system project that allows you to create accounts, make deposits, withdrawals, transfers and consult financial transactions.
 
 ---
 
-## **Sumário**
+## **Summary**
 - [Back-End](#back-end)
 - [Front-End](#front-end)
-- [Contribuições](#contribuições)
+- [Contributions](#contributions)
 
 ---
 
 ## **Back-End**
 
-### **Tecnologias Utilizadas**
-- **C++** (compilado com g++)
-- **PostgreSQL** (Banco de dados)
-- **cpp-httplib** (Servidor HTTP)
-- **json.hpp** (Manipulação de JSON)
-- **OpenSSL** (Hash de senhas com SHA256)
-- **Docker** (Para ambiente de desenvolvimento e banco de dados)
+### **Technologies Used**
+- **C++** (compiled with g++)
+- **PostgreSQL** (Database)
+- **cpp-httplib** (HTTP Server)
+- **json.hpp** (JSON Manipulation)
+- **OpenSSL** (Password Hashing with SHA256)
+- **Docker** (For development environment and database)
 
-### **Instalação e Configuração**
+### **Installation and Configuration**
 
-#### **Pré-requisitos**
-- **Docker** e **Docker Compose** instalados
-- **g++** (caso deseje rodar sem Docker)
-- **PostgreSQL** (caso deseje rodar sem Docker)
+#### **Prerequisites**
+- **Docker** and **Docker Compose** installed
+- **g++** (if you want to run without Docker)
+- **PostgreSQL** (if you want to run without Docker)
 
-#### **Passos para rodar o backend**
-1. **Clone o repositório**  
-   ```sh
-   git clone https://github.com/yLukas077/Banking-System.git
-   cd banking-system
-   ```
+#### **Steps to run the backend**
+1. **Clone the repository**
+```sh
+git clone https://github.com/yLukas077/Banking-System.git
+cd banking-system
+```
 
-2. **Suba os containers com Docker Compose**  
-   ```sh
-   docker-compose up --build -d
-   ```
+2. **Upload the containers with Docker Compose**
+```sh
+docker-compose up --build -d
+```
 
-3. **A API estará disponível em:**  
-   ```
-   http://localhost:8080
-   ```
+3. **The API will be available at:**
+```
+http://localhost:8080
+```
 
-### **Rotas da API**
+### **API Routes**
 
-#### **Autenticação e Conta**
-- **Criar conta:** `POST /account/create`
+#### **Authentication and Account**
+- **Create account:** `POST /account/create`
 - **Login:** `POST /account/login`
-- **Buscar conta por CPF:** `GET /account/find?cpf={cpf}`
+- **Search for account by CPF:** `GET /account/find?cpf={cpf}`
 
-#### **Operações Bancárias**
-- **Depósito:** `POST /account/deposit`
-- **Saque:** `POST /account/withdraw`
-- **Transferência:** `POST /account/transfer`
+#### **Operations Banking**
+- **Deposit:** `POST /account/deposit`
+- **Withdrawal:** `POST /account/withdraw`
+- **Transfer:** `POST /account/transfer`
 
-#### **Consultas**
-- **Consultar transações por CPF:** `GET /transactions?cpf={cpf}`
-- **Consultar todas as transações:** `GET /transactions/all`
+#### **Query**
+- **Query transactions by CPF:** `GET /transactions?cpf={cpf}`
+- **Query all transactions:** `GET /transactions/all`
 
 ---
 
 ## **Front-End**
 
-### **Tecnologias Utilizadas**
-
+### **Technologies Used**
 
 ---
 
-## **Contribuições**
-Contribuições são bem-vindas! Se deseja ajudar no desenvolvimento do projeto, siga os passos:
-1. Faça um **fork** do repositório.
-2. Crie uma **branch** com a nova funcionalidade ou correção:  
-   ```sh
-   git checkout -b minha-mudanca
-   ```
-3. **Commit suas alterações:**  
-   ```sh
-   git commit -m "Descrição da mudança"
-   ```
-4. **Envie para seu fork:**  
-   ```sh
-   git push origin minha-mudanca
-   ```
-5. **Crie um Pull Request** no repositório principal.
+## **Contributions**
+Contributions are welcome! If you want to help with the development of the project, follow these steps:
+1. Fork the repository. 
+
+2. Create a **branch** with the new feature or fix:
+```sh
+git checkout -b my-change
+```
+3. **Commit your changes:**
+```sh
+git commit -m "Change description"
+```
+4. **Push to your fork:**
+```sh
+git push origin my-change
+```
+5. **Create a Pull Request** in the main repository.
 
 ---
