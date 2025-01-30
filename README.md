@@ -8,7 +8,6 @@ O **Banking System** é um projeto de sistema bancário simplificado que permite
 - [Back-End](#back-end)
 - [Front-End](#front-end)
 - [Contribuições](#contribuições)
-- [Licença](#licença)
 
 ---
 
