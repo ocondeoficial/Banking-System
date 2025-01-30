@@ -43,4 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
   });
+  function cancelarOperacao() {
+    window.location.href = "perfil.html";
+  }
   
