@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="deposito.css">
+  <title>Depósito</title>
+</head>
+<body>
+  <main>
+    <div class="valor">
+      <h2>Valor a ser depositado:</h2>
+      <form id="depositForm">
+        <input type="number" id="valorDeposito" name="valorDeposito" placeholder="R$ 0,00" step="0.01" required>
+        
+        <div class="botao">
+          <button type="submit" class="depositar">
+            Depositar
+          </button>
+          <button type="button" class="cancelar" onclick="cancelarOperacao()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+      <p id="message"></p>
+    </div>
+  </main>
+  <script src="./deposito.js"> </script>
+</body>
+</html>

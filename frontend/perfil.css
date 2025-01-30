@@ -1,0 +1,139 @@
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    height: 40rem;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    background-color: #0C0A59;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.foto-perfil img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+header h1 {
+    font-size: 1.2rem;
+    color: white;
+    margin: 0;
+    font-weight: 700;
+}
+
+.saldo {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.saldo h2 {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.saldo-atual {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #0C0A59;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.botao {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 2rem;
+}
+
+.botao-transferencia,
+.botao-deposito,
+.botao-saque {
+    flex: 1;
+    padding: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #0C0A59, #1E1A96);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.botao-transferencia:hover,
+.botao-deposito:hover,
+.botao-saque:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.botao-deposito {
+    background: linear-gradient(135deg, #bab533, #7e7e20);
+}
+
+.botao-saque {
+    background: linear-gradient(135deg, #12731c, #083a12);
+}
+
+/* Efeito de clique nos botões */
+.botao-transferencia:active,
+.botao-deposito:active,
+.botao-saque:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.botao-extrato {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.botao-extrato button {
+  width: 100%;
+  padding: 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, #2d2d2d, #4a4a4a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60px;
+}
+
+.botao-extrato button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.botao-extrato button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

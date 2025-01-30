@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="saque.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <title>Saque</title>
+</head>
+<body>
+  <main>
+    <div class="valor">
+      <h2> Valor a ser retirado: </h2>
+      <form id="SaqueForm">
+        <input type="number" id="valorSaque" name="valorSaque" placeholder="R$ 0,00" step="0.01" required>
+        
+        <div class="botao">
+          <button type="submit" class="saque">
+            Realizar Saque
+          </button>
+          <button type="button" class="cancelar" onclick="cancelarOperacao()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+      <p id="message"></p>
+    </div>
+  </main>
+
+  <script src="./saque.js"> </script>
+</body>
+</html>

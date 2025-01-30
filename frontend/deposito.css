@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    box-sizing: border-box;
+}
+
+main {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.valor h2 {
+    color: #0C0A59;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+input[type="number"]:focus {
+    border-color: #0C0A59;
+    box-shadow: 0 0 0 3px rgba(12, 10, 89, 0.1);
+    outline: none;
+}
+
+.botao {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 2rem;
+}
+
+button {
+    flex: 1;
+    padding: 15px 25px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button.depositar {
+    background: linear-gradient(135deg, #1E1A96, #0C0A59);
+    color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button.depositar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+button.depositar:active {
+    transform: translateY(1px);
+}
+
+button.cancelar {
+    background: linear-gradient(135deg, #f44336, #d32f2f);
+    color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button.cancelar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+button.cancelar:active {
+    transform: translateY(1px);
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 1.5rem;
+    }
+    
+    .valor h2 {
+        font-size: 1.5rem;
+    }
+    
+    button {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Estilos adicionais para consistência */
+label {
+    display: block;
+    color: #0C0A59;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+}
+
+.valor p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    text-align: center;
+}
