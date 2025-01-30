@@ -37,7 +37,7 @@ O **Banking System** é um projeto de sistema bancário simplificado que permite
 
 2. **Suba os containers com Docker Compose**  
    ```sh
-   docker-compose up --build
+   docker-compose up --build -d
    ```
 
 3. **A API estará disponível em:**  
