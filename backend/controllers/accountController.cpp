@@ -11,6 +11,21 @@ AccountController::AccountController() {}
 // Configuração das rotas da API
 void AccountController::setupRoutes(httplib::Server& server) {
     
+    server.set_pre_routing_handler([](const httplib::Request &req, httplib::Response &res) {
+        
+        res.set_header("Access-Control-Allow-Origin", "*");
+        res.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+        
+        if (req.method == "OPTIONS") {
+            res.status = 200;
+            return httplib::Server::HandlerResponse::Handled;
+        }
+
+        return httplib::Server::HandlerResponse::Unhandled;
+    });
+    
     // Criar conta
     server.Post("/account/create", [&](const httplib::Request& req, httplib::Response& res) {
         try {
@@ -34,18 +49,24 @@ void AccountController::setupRoutes(httplib::Server& server) {
 
     // Login de conta
     server.Post("/account/login", [&](const httplib::Request& req, httplib::Response& res) {
-        try {
-            auto body = json::parse(req.body);
-            std::string cpf = body["cpf"];
-            std::string password = body["password"];
-            bool success = accountService.validateLogin(cpf, password);
+        auto body = json::parse(req.body);
+        std::string cpf = body["cpf"];
+        std::string password = body["password"];
 
-            json response = {{"message", success ? "Login successful!" : "Invalid CPF or password."}};
-            res.status = success ? 200 : 401;
+        if (accountService.validateLogin(cpf, password)) {
+            Account* account = accountService.findAccountByCpf(cpf);
+
+            json response = {
+                {"success", true},
+                {"holder", account->getHolder()},
+                {"balance", account->getBalance()},
+                {"cpf", account->getCpf()}
+            };
             res.set_content(response.dump(), "application/json");
-        } catch (const std::exception&) {
-            res.status = 400;
-            res.set_content(json{{"error", "Invalid request format"}}.dump(), "application/json");
+        } else {
+            res.status = 401;
+            json response = {{"success", false}, {"message", "CPF ou senha inválidos."}};
+            res.set_content(response.dump(), "application/json");
         }
     });
 
