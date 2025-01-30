@@ -1,20 +1,19 @@
-#include "account.h"
+#pragma once
+#include <string>
 
-Account::Account(int id, const std::string& holder, const std::string& cpf, double balance)
-    : id(id), holder(holder), cpf(cpf), balance(balance) {}
+class Account {
+private:
+    int id;
+    std::string holder;
+    std::string cpf;
+    double balance;
 
-int Account::getId() const {
-    return id;
-}
+public:
+    Account(int id, const std::string& holder, const std::string& cpf, double initialBalance);
 
-std::string Account::getHolder() const {
-    return holder;
-}
+    int getId() const;
+    std::string getHolder() const;
+    std::string getCpf() const;
+    double getBalance() const;
 
-std::string Account::getCpf() const {
-    return cpf;
-}
-
-double Account::getBalance() const {
-    return balance;
-}
+};

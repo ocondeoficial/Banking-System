@@ -1,7 +1,8 @@
 #include "account.h"
+#include <iostream>
 
-Account::Account(int id, const std::string& holder, const std::string& cpf, double balance)
-    : id(id), holder(holder), cpf(cpf), balance(balance) {}
+Account::Account(int id, const std::string& holder, const std::string& cpf, double initialBalance)
+    : id(id), holder(holder), cpf(cpf), balance(initialBalance) {}
 
 int Account::getId() const {
     return id;
@@ -18,3 +19,4 @@ std::string Account::getCpf() const {
 double Account::getBalance() const {
     return balance;
 }
+
