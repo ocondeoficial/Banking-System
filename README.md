@@ -66,7 +66,9 @@ http://localhost:8080
 ## **Front-End**
 
 ### **Technologies Used**
-
+-**HTML5**
+-**CSS**
+-**JavaScript**
 ---
 
 ## **Contributions**
