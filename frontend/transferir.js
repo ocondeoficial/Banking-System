@@ -30,7 +30,7 @@ document.getElementById("valorForm").addEventListener("submit", function(event) 
     })
     .then(response => {
         if (response.ok) {
-            return response.text();
+            return "Sua transferência foi um sucesso!!";
         } else {
             throw new Error("Transferência falhou!");
         }
