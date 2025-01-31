@@ -79,7 +79,7 @@ http://localhost:8080
 
 - **HTML5**
 - **CSS3**
-- **JavaScript (ES6+)**
+- **JavaScript**
 - **Live Server**
 
 ### **How to Run the Front-End**
