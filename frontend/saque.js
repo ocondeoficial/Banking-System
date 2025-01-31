@@ -23,7 +23,7 @@ document.getElementById("SaqueForm").addEventListener("submit", function(event) 
   })
   .then(response => {
     if (response.ok) {
-      return response.text();
+      return "Seu saque foi um sucesso!!";
     } else {
       throw new Error("Saque falhou!");
     }
