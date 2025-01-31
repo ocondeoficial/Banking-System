@@ -23,7 +23,7 @@ document.getElementById("depositForm").addEventListener("submit", function(event
   })
   .then(response => {
     if (response.ok) {
-      return response.text();
+      return "Seu depósito foi um sucesso!!";
     } else {
       throw new Error("Depósito falhou!");
     }
