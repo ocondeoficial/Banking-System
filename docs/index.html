@@ -1,69 +1,158 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Bancário</title>
+    <title>Sistema Bancário LGV</title>
     <style>
+        /* Estilos Gerais */
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-        }
-        main {
-            padding: 20px;
+            text-align: center;
+            color: #333;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: auto;
-            background: white;
             padding: 20px;
+            background: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        footer {
-            background-color: #007bff;
-            color: white;
-            padding: 10px;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
+        
+        /* Cabeçalho */
+        .header {
+            padding: 20px 0;
         }
-        a {
-            color: #007bff;
-            text-decoration: none;
+        .header h1 {
+            margin: 15px 0;
+            font-size: 28px;
+            color: #000000;
+        }
+        .header img {
+            width: 120px;
+            margin: 30px 0 10px;
+        }
+        .dev-links {
+            margin-top: 10px;
+        }
+        .dev-links a {
+            text-decoration: underline;
+            color: #273697;
             font-weight: bold;
+            margin: 0 5px;
+        }
+
+        /* Links */
+        .links {
+            margin: 20px 0;
+        }
+        .links a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #273697;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .links a:hover {
+            background-color: #182472;
+        }
+
+        /* Seções */
+        .section {
+            margin: 40px 0;
+        }
+        .section h2 {
+            font-size: 24px;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+        .section p {
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        /* Imagens */
+        .screenshots img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .screenshots strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Rodapé */
+        .footer {
+            margin-top: 30px;
+            padding: 20px;
+            background: #273697;
+            color: white;
+            font-size: 14px;
+            border-radius: 0 0 10px 10px;
+        }
+        .footer a {
+            color: white;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Bem-vindo ao Sistema Bancário</h1>
-    </header>
-    <main>
-        <div class="container">
-            <h2>Sobre o Projeto</h2>
-            <p>Este sistema bancário foi desenvolvido utilizando HTML, CSS e JavaScript para fornecer uma experiência interativa.</p>
-            <h2>Funcionalidades</h2>
-            <ul style="text-align: left; display: inline-block;">
-                <li>Cadastro de contas bancárias</li>
-                <li>Depósitos e saques</li>
-                <li>Transferências entre contas</li>
-                <li>Consulta de saldo</li>
-            </ul>
-            <h2>Acesse o Código</h2>
-            <p>O código-fonte está disponível no <a href="https://github.com/seu-usuario/seu-repositorio" target="_blank">GitHub</a>.</p>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <div class="header">
+            <h1>Sistema Bancário LGV</h1>
+            <div class="dev-links">
+                <a href="https://github.com/ocondeoficial">Victor Conde,</a>
+                <a href="https://github.com/yLukas077">Lucas Marques</a>
+                <a href="https://github.com/gsn03">Gustavo Nogueira</a>
+            </div>
+            <img src="./logo.png" alt="Logo LGV">
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2025 Sistema Bancário. Todos os direitos reservados.</p>
-    </footer>
+
+        <!-- Links -->
+        <div class="links">
+            <a href="https://github.com/yLukas077/Banking-System" target="_blank">GitHub</a>
+        </div>
+
+        <!-- Sobre o Projeto -->
+        <div class="section">
+            <h2>Sobre o Projeto</h2>
+            <p>O Sistema Bancário LGV foi desenvolvido para fornecer uma solução eficiente e segura para a gestão de contas bancárias, transações financeiras e consultas de extratos. Com uma interface amigável e segura, o sistema foi projetado para facilitar a vida dos usuários e proporcionar uma experiência sem complicações ao gerenciar suas finanças pessoais e profissionais.</p>
+            <p>Com funcionalidades como criação de contas, transferências, consulta de saldo e extratos detalhados, o LGV se destaca pela facilidade de uso e confiabilidade. O sistema adota altos padrões de segurança para garantir a proteção das informações sensíveis dos usuários, utilizando criptografia avançada para todas as transações e dados registrados.</p>
+        </div>
+
+        <!-- Funcionalidades -->
+        <div class="section screenshots">
+            <h2>Funcionalidades do Sistema</h2>
+            <br>
+            <h3>Criação de Contas</h3>
+            <p>O sistema permite aos usuários criar novas contas bancárias com um processo simples e rápido.</p>
+            <img src="source/conta_criar.png" alt="Criação de Conta">
+
+            <h3>Transferências Bancárias</h3>
+            <p>Facilita a realização de transferências entre contas bancárias de forma rápida e segura.</p>
+            <img src="source/transferencias.png" alt="Transferências Bancárias">
+
+            <h3>Consulta de Extratos</h3>
+            <p>Exibe extratos bancários detalhados com todas as transações realizadas, oferecendo visibilidade total sobre as finanças.</p>
+            <img src="source/extrato.png" alt="Consulta de Extratos">
+        </div>
+
+        <div class="footer">
+            <p>Desenvolvido por <a href="https://github.com/ocondeoficial">Victor Conde</a>, <a href="https://github.com/gsn03">Gustavo Nogueira</a></p> e <a href="https://github.com/yLukas077">Lucas Marques</a>">Lucas Marques</a></p>
+            <p>&copy; 2025 Sistema Bancário LGV - Todos os direitos reservados.</p>
+        </div>
+    </div>
 </body>
 </html>
